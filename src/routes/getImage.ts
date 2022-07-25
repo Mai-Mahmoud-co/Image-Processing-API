@@ -1,13 +1,16 @@
 import { Router, Request, Response, } from 'express';
-import { validateImageParams } from '../../validation';
-import { imageExist, thumbExist, thumbPath } from '../../file';
-import { processImage } from '../../imageProcessor';
-import { imageParams } from '../../imageParams';
-export const images_routes = Router();
-images_routes.get('/', async (req: Request, res: Response) => {
+import { validateImageParams } from '../utils/validation';
+import { imageExist, thumbExist, thumbPath } from '../utils/fileHandler';
+import { scaleImage } from '../utils/imageHandler';
+import { imageGetParams } from '../utils/IimageGetParams';
+
+
+
+export const getimage_route = Router();
+getimage_route.get('/', async (req: Request, res: Response) => {
 
 //get Request parameters
-  const params:imageParams = req.query;
+  const params:imageGetParams = req.query;
 
 //Validate get parameters
   const validation = validateImageParams(params);
@@ -24,7 +27,7 @@ images_routes.get('/', async (req: Request, res: Response) => {
     //create thumbnail with provided parameters if not existing
   if (thumbExist(params) == false) {
     console.log(`Creating Thumbnail at ${thumbPath(params)}`);
-    const result = await processImage(params);
+    const result = await scaleImage(params);
     if (result != null) {
       return res.status(500).send(result)
     }

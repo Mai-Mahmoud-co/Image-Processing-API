@@ -1,5 +1,5 @@
 import supertest from 'supertest';
-import app from "../..";
+import app from "..";
 const request = supertest(app);
 
 it('Using the main endpoint returns 200', async () => {
