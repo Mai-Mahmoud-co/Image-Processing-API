@@ -4,8 +4,9 @@ const routes = Router();
 
 routes.get('/',(_req:Request,res:Response)=>
 {
-    res.send('Welcome to Image Processing Api');
+    res.send(`Welcome to Image Processing Api`);
 });
 routes.use('/getImage',getimage_route);
-
 export default routes;
+
+

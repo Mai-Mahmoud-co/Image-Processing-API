@@ -4,7 +4,7 @@ import { imageGetParams } from "./IimageGetParams";
 
 //Images Locations 
 const fullLocation: string = path.resolve('images', 'full');
-const thumbsLocation: string = path.resolve('images', 'thumbnails');
+export const thumbsLocation: string = path.resolve('images', 'thumbnails');
 
 //Check If Image file Exists
 export const imageExist = (params: imageGetParams) => {

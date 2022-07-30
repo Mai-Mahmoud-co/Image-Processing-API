@@ -1,9 +1,8 @@
-import { Router, Request, Response, } from 'express';
+import { Router, Request, Response } from 'express';
 import { validateImageParams } from '../utils/validation';
 import { imageExist, thumbExist, thumbPath } from '../utils/fileHandler';
 import { scaleImage } from '../utils/imageHandler';
 import { imageGetParams } from '../utils/IimageGetParams';
-
 
 
 export const getimage_route = Router();
@@ -11,7 +10,6 @@ getimage_route.get('/', async (req: Request, res: Response) => {
 
 //get Request parameters
   const params:imageGetParams = req.query;
-
 //Validate get parameters
   const validation = validateImageParams(params);
   if (validation.valid == false) {

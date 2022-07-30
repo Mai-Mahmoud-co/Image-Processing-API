@@ -1,6 +1,7 @@
 import sharp from "sharp";
 import { imageGetParams } from "./IimageGetParams";
-import { fullPath, thumbPath } from './fileHandler';
+import { fullPath, thumbPath ,thumbsLocation} from './fileHandler';
+import {existsSync,mkdirSync} from 'fs';
 
 /**
  * Processing Image via get parameters
@@ -8,8 +9,14 @@ import { fullPath, thumbPath } from './fileHandler';
  * @returns Returns Error Meassage if failed
  */
 export async function scaleImage(params: imageGetParams) {
-
  try {
+  
+
+
+if (!existsSync(thumbsLocation)){
+    mkdirSync(thumbsLocation);
+}
+
     await sharp(fullPath(params))
         .resize(+params.w!, +params.h!).toFormat('jpeg')
         .toFile(thumbPath(params));
